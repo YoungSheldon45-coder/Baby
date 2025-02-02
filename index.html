@@ -22,7 +22,7 @@
         position: fixed;
         width: 30px;
         height: 30px;
-        background: linear-gradient(45deg, #ff4d6d, #fff0f3);
+        background-color: #fff0f3;
         clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         animation: fall linear infinite;
         z-index: 0;
@@ -187,7 +187,8 @@
         position: absolute;
         font-size: 40px;
         color: #ff4d6d;
-        animation: pulse 2s infinite;
+        animation: pulse 4s infinite;
+        left: 135px;
       }
 
       @keyframes pulse {
@@ -322,7 +323,7 @@
         border: none;
         border-radius: 50px;
         cursor: pointer;
-        animation: pulse 2s infinite;
+        animation: pulse 4s infinite;
       }
 
       @media (max-width: 600px) {
@@ -616,7 +617,9 @@
         const audio = document.getElementById("music");
         audio.play();
         audioStarted = true;
-        createPetals()
+        setTimeout(() => {
+          createPetals();
+        }, 100);
       }
 
       function openEnvelope() {
@@ -631,29 +634,6 @@
         }, 1000);
       }
 
-      // Enhanced No Button Movement
-      function moveButton() {
-        const noBtn = document.getElementById("noBtn");
-        const maxMove = window.innerWidth > 600 ? 500 : 300;
-        const x = (Math.random() - 0.5) * maxMove;
-        const y = (Math.random() - 0.5) * maxMove;
-
-        noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${
-          Math.random() * 360
-        }deg)`;
-        noBtn.style.opacity = "0.7";
-
-        // Prevent immediate re-hover
-        noBtn.style.pointerEvents = "none";
-        setTimeout(() => {
-          noBtn.style.pointerEvents = "auto";
-        }, 1000);
-      }
-
-      function playfulNo() {
-        alert("I'll keep asking until you say YES! 💕");
-      }
-
       function toggleMute() {
         const audio = document.getElementById("music");
         const btn = document.getElementById("muteBtn");
@@ -661,10 +641,9 @@
         btn.textContent = audio.muted ? "🔇" : "🔊";
       }
 
-
       function createPetals() {
         const petalsContainer = document.getElementById("petals");
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
           const petal = document.createElement("div");
           petal.className = "petal";
           petal.style.left = Math.random() * 100 + "vw";
@@ -688,86 +667,42 @@
         }
       }
 
-      // Crazy Celebration Function
-      //   function celebrate() {
-      //     // Remove existing elements
-      //     document.querySelector(".container").innerHTML = "";
-
-      //     // Create celebration elements
-      //     const celebration = document.createElement("div");
-      //     celebration.style.position = "fixed";
-      //     celebration.style.top = "50%";
-      //     celebration.style.left = "50%";
-      //     celebration.style.transform = "translate(-50%, -50%)";
-      //     celebration.style.fontSize = "5em";
-      //     celebration.style.animation = "crazyCelebration 1s infinite";
-      //     celebration.innerHTML = "💖🎉🥳🎈❤️";
-
-      //     document.body.appendChild(celebration);
-
-      //     // Add sparkles
-      //     for (let i = 0; i < 100; i++) {
-      //       const sparkle = document.createElement("div");
-      //       sparkle.className = "sparkle";
-      //       sparkle.style.left = Math.random() * 100 + "vw";
-      //       sparkle.style.top = Math.random() * 100 + "vh";
-      //       document.body.appendChild(sparkle);
-      //       setTimeout(() => sparkle.remove(), 1000);
-      //     }
-
-      //     // Add floating emojis
-      //     const emojis = ["💐", "🌸", "🎊", "💝", "✨", "🥂", "🎁"];
-      //     for (let i = 0; i < 50; i++) {
-      //       const emoji = document.createElement("div");
-      //       emoji.className = "celebration-emoji";
-      //       emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-      //       emoji.style.left = Math.random() * 100 + "vw";
-      //       emoji.style.animation = `float ${Math.random() * 2 + 1}s ease-out`;
-      //       document.body.appendChild(emoji);
-      //       setTimeout(() => emoji.remove(), 2000);
-      //     }
-
-      //     // Background animation
-      //     document.body.style.animation = "rainbowBackground 5s infinite";
-
-      //     document.querySelector("h1").innerHTML =
-      //       "You've made me the happiest man in the world! 💖<br>" +
-      //       "<span style='font-size: 0.8em'>My heart is yours forever</span>";
-
-      //     const heading = document.querySelector("h1");
-      //     heading.style.animation = "textScale 1s infinite alternate";
-
-      //     const style = document.createElement("style");
-      //     style.textContent = `
-      //     @keyframes textScale {
-      //         0% { transform: scale(1); }
-      //         100% { transform: scale(1.1); }
-      //     }
-      // `;
-      //     document.head.appendChild(style);
-      //   }
-
       function celebrate() {
-        // Confetti explosion
-        for (let i = 0; i < 150; i++) {
-          const confetti = document.createElement("div");
-          confetti.className = "confetti";
-          confetti.style.backgroundColor = `hsl(${
-            Math.random() * 360
-          }, 100%, 50%)`;
-          confetti.style.left = Math.random() * 100 + "vw";
-          confetti.style.top = Math.random() * 100 + "vh";
-          document.body.appendChild(confetti);
-          setTimeout(() => confetti.remove(), 1500);
-        }
-
         const petals = document.querySelectorAll(".petal");
         petals.forEach((petal) => {
           petal.style.animationPlayState = "paused";
           petal.remove(); // Remove petals from DOM for better performance
         });
 
-        createRedHearts();
+        const confettiFragment = document.createDocumentFragment();
+        for (let i = 0; i < 100; i++) {
+          // Reduced from 150 to 100
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 50%)`;
+          confetti.style.transform = `translate3d(${Math.random() * 100}vw, ${
+            Math.random() * 100
+          }vh, 0)`;
+          confettiFragment.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 1500);
+        }
+        document.body.appendChild(confettiFragment);
+
+        const heartsFragment = document.createDocumentFragment();
+        for (let i = 0; i < 30; i++) {
+          // Reduced from 50 to 30
+          const heart = document.createElement("div");
+          heart.className = "floating-heart";
+          heart.innerHTML = "❤";
+          heart.style.transform = `translate3d(${Math.random() * 100}vw, ${
+            Math.random() * 100
+          }vh, 0)`;
+          heartsFragment.appendChild(heart);
+          setTimeout(() => heart.remove(), 2000);
+        }
+        document.body.appendChild(heartsFragment);
 
         // Create new message element
         const successMessage = document.createElement("div");
@@ -859,29 +794,11 @@
         }, 4000);
       }
 
-      function updateNavigation() {
-        document.getElementById("prevBtn").style.display =
-          currentSlide === 0 ? "none" : "block";
-        document.getElementById("nextBtn").style.display =
-          currentSlide === secretMessages.length - 1 ? "none" : "block";
-
-        document.querySelectorAll(".indicator").forEach((indicator, index) => {
-          indicator.classList.toggle("active", index === currentSlide);
-        });
-      }
-
       // Add scroll to top on refresh
       window.onload = function () {
         window.scrollTo(0, 0);
         history.scrollRestoration = "manual";
       };
-
-      // Add swipe detection
-      document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("secretMessages");
-        container.addEventListener("touchstart", handleTouchStart);
-        container.addEventListener("touchend", handleTouchEnd);
-      });
 
       // Add rainbow background animation
       const style = document.createElement("style");
@@ -896,63 +813,6 @@
         }
     `;
       document.head.appendChild(style);
-
-      // Add these new functions
-      function handleScroll() {
-        const arrow = document.getElementById("scrollArrow");
-        const messagesContainer = document.getElementById("secretMessages");
-        const scrollY = window.scrollY;
-        const containerRect = messagesContainer.getBoundingClientRect();
-
-        // Hide arrow when scrolling starts
-        if (scrollY > 100) {
-          arrow.style.opacity = "0";
-        }
-
-        // Calculate position relative to messages container
-        const scrollPosition = window.scrollY;
-        const messageIndex = Math.floor(scrollPosition / window.innerHeight);
-
-        if (
-          messageIndex >= messagesShown &&
-          messageIndex < secretMessages.length
-        ) {
-          showMessage(messageIndex);
-          messagesShown = messageIndex + 1;
-        }
-      }
-
-      function showMessage(index) {
-        const container = document.getElementById("secretMessages");
-        const existingMessage = container.querySelector(
-          `[data-index="${index}"]`
-        );
-
-        if (!existingMessage) {
-          const wrapper = document.createElement("div");
-          wrapper.className = "message-wrapper";
-          wrapper.dataset.index = index;
-
-          const message = document.createElement("div");
-          message.className = "secret-message";
-          message.innerHTML = `
-            <h2 style="color: #ff4d6d; margin-bottom: 15px;">❤️ Message ${
-              index + 1
-            } ❤️</h2>
-            <p style="font-size: 1.2em; color: #333;">${
-              secretMessages[index]
-            }</p>
-        `;
-
-          wrapper.appendChild(message);
-          container.appendChild(wrapper);
-
-          setTimeout(() => {
-            message.style.opacity = "1";
-            message.style.transform = "translate(-50%, -50%)";
-          }, 50);
-        }
-      }
 
       // Add this to initialize secret messages
       document.getElementById("secretMessages").style.height = `${
