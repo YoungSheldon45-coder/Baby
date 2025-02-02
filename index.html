@@ -26,6 +26,8 @@
         clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         animation: fall linear infinite;
         z-index: 0;
+        animation-duration: 4s !important;
+        animation-timing-function: linear;
       }
 
       @keyframes fall {
@@ -309,11 +311,10 @@
 
       @media (max-width: 600px) {
         .start-button {
-            font-size: 1.1em;
-            padding: 10px, 40px;
+          font-size: 1.1em;
+          padding: 10px, 40px;
         }
       }
-
 
       footer {
         position: fixed;
@@ -414,7 +415,6 @@
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        
       }
 
       .scroll-indicator {
@@ -467,6 +467,10 @@
       .carousel-indicators {
         display: none !important;
       }
+
+      .funny-text {
+        color: #ff4d6d;
+      }
     </style>
   </head>
   <body>
@@ -489,10 +493,8 @@
         <h1 class="will-you">Will you be my Valentine? 💖</h1>
         <div class="buttons">
           <button id="yesBtn" onclick="celebrate()">YES! 💘</button>
-          <button id="noBtn" onmouseover="moveButton()" onclick="playfulNo()">
-            Not Yet 😅
-          </button>
         </div>
+        <p class="funny-text" >You're my wife so you can't say no😂</p>
       </div>
     </div>
 
@@ -500,7 +502,7 @@
 
     <audio id="music" loop>
       <source
-        src="./audio/John Legend  All of Me Lyrics.mp3"
+        src="./audio/Love letter final.mp3"
         type="audio/mpeg"
       />
     </audio>
@@ -603,6 +605,8 @@
         createFloatingHearts();
       }
 
+      createFloatingHearts();
+
       // Create floating hearts
       function createFloatingHearts() {
         setInterval(() => {
@@ -613,8 +617,10 @@
           heart.style.animationDuration = Math.random() * 3 + 3 + "s";
           document.body.appendChild(heart);
           setTimeout(() => heart.remove(), 6000);
-        }, 300);
+        }, 2000);
       }
+
+      
 
       function openEnvelope() {
         if (!audioStarted) return;
@@ -735,7 +741,7 @@
 
       function celebrate() {
         // Confetti explosion
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 150; i++) {
           const confetti = document.createElement("div");
           confetti.className = "confetti";
           confetti.style.backgroundColor = `hsl(${
