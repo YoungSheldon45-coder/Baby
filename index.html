@@ -20,8 +20,8 @@
 
       .petal {
         position: fixed;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         background: linear-gradient(45deg, #ff4d6d, #fff0f3);
         clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         animation: fall linear infinite;
@@ -666,7 +666,7 @@
 
       function createPetals() {
         const petalsContainer = document.getElementById("petals");
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 50; i++) {
           const petal = document.createElement("div");
           petal.className = "petal";
           petal.style.left = Math.random() * 100 + "vw";
