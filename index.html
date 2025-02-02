@@ -20,14 +20,15 @@
 
       .petal {
         position: fixed;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         background-color: #fff0f3;
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        transform: translateZ(0);
         animation: fall linear infinite;
         z-index: 0;
         animation-duration: 4s !important;
         animation-timing-function: linear;
+        border-radius: 15% 20% 15% 20%;
       }
 
       .hearts {
@@ -43,10 +44,10 @@
 
       @keyframes fall {
         0% {
-          transform: translateY(-10vh) rotate(0deg);
+          transform: translate3d(0, -10vh, 0) rotate(0deg);
         }
         100% {
-          transform: translateY(110vh) rotate(360deg);
+          transform: translate3d(0, 110vh, 0) rotate(360deg);
         }
       }
 
@@ -593,32 +594,18 @@
         "Your love is the light that guides me through the endless night.",
       ];
 
-      // Add this function to handle swipe
-      function handleTouchStart(e) {
-        touchStartX = e.changedTouches[0].screenX;
-      }
-
-      function handleTouchEnd(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }
-
-      function handleSwipe() {
-        if (touchStartX - touchEndX > 50) {
-          nextSlide();
-        } else if (touchEndX - touchStartX > 50) {
-          prevSlide();
-        }
-      }
-
       function startExperience() {
         document.getElementById("startScreen").style.display = "none";
         const audio = document.getElementById("music");
-        audio.play();
-        audioStarted = true;
-        setTimeout(() => {
+
+        requestAnimationFrame(() => {
           createPetals();
-        }, 100);
+          // Pre-warm animations
+          setTimeout(() => {
+            audio.play(), 300;
+            audioStarted = true;
+          });
+        });
       }
 
       function openEnvelope() {
@@ -642,7 +629,7 @@
 
       function createPetals() {
         const petalsContainer = document.getElementById("petals");
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 20; i++) {
           const petal = document.createElement("div");
           petal.className = "petal";
           petal.style.left = Math.random() * 100 + "vw";
@@ -650,6 +637,10 @@
           petal.style.animationDelay = Math.random() * 7 + "s";
           petalsContainer.appendChild(petal);
         }
+
+        requestAnimationFrame(() => {
+          petalsContainer.appendChild(fragment);
+        });
       }
 
       function createRedHearts() {
@@ -667,13 +658,12 @@
       }
 
       function celebrate() {
-
         const petals = document.querySelectorAll(".petal");
         petals.forEach((petal) => {
           petal.style.animationPlayState = "paused";
           petal.remove(); // Remove petals from DOM for better performance
         });
-        
+
         // Confetti explosion
         for (let i = 0; i < 150; i++) {
           const confetti = document.createElement("div");
@@ -686,8 +676,6 @@
           document.body.appendChild(confetti);
           setTimeout(() => confetti.remove(), 1500);
         }
-
-        
 
         createRedHearts();
 
