@@ -188,7 +188,6 @@
         font-size: 40px;
         color: #ff4d6d;
         animation: pulse 4s infinite;
-        left: 135px;
       }
 
       @keyframes pulse {
@@ -323,12 +322,12 @@
         border: none;
         border-radius: 50px;
         cursor: pointer;
-        animation: pulse 4s infinite;
+        animation: pulse 3s infinite;
       }
 
       @media (max-width: 600px) {
         .start-button {
-          font-size: 1.1em;
+          font-size: 1em;
           padding: 10px, 40px;
         }
       }
@@ -668,41 +667,29 @@
       }
 
       function celebrate() {
+
         const petals = document.querySelectorAll(".petal");
         petals.forEach((petal) => {
           petal.style.animationPlayState = "paused";
           petal.remove(); // Remove petals from DOM for better performance
         });
-
-        const confettiFragment = document.createDocumentFragment();
-        for (let i = 0; i < 100; i++) {
-          // Reduced from 150 to 100
+        
+        // Confetti explosion
+        for (let i = 0; i < 150; i++) {
           const confetti = document.createElement("div");
           confetti.className = "confetti";
           confetti.style.backgroundColor = `hsl(${
             Math.random() * 360
           }, 100%, 50%)`;
-          confetti.style.transform = `translate3d(${Math.random() * 100}vw, ${
-            Math.random() * 100
-          }vh, 0)`;
-          confettiFragment.appendChild(confetti);
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.top = Math.random() * 100 + "vh";
+          document.body.appendChild(confetti);
           setTimeout(() => confetti.remove(), 1500);
         }
-        document.body.appendChild(confettiFragment);
 
-        const heartsFragment = document.createDocumentFragment();
-        for (let i = 0; i < 30; i++) {
-          // Reduced from 50 to 30
-          const heart = document.createElement("div");
-          heart.className = "floating-heart";
-          heart.innerHTML = "❤";
-          heart.style.transform = `translate3d(${Math.random() * 100}vw, ${
-            Math.random() * 100
-          }vh, 0)`;
-          heartsFragment.appendChild(heart);
-          setTimeout(() => heart.remove(), 2000);
-        }
-        document.body.appendChild(heartsFragment);
+        
+
+        createRedHearts();
 
         // Create new message element
         const successMessage = document.createElement("div");
