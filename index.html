@@ -616,7 +616,7 @@
         const audio = document.getElementById("music");
         audio.play();
         audioStarted = true;
-        createFloatingHearts(); // Make sure this is called
+        createPetals()
       }
 
       function openEnvelope() {
@@ -661,8 +661,6 @@
         btn.textContent = audio.muted ? "🔇" : "🔊";
       }
 
-      // Initialize
-      createPetals();
 
       function createPetals() {
         const petalsContainer = document.getElementById("petals");
