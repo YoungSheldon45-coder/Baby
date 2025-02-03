@@ -36,10 +36,9 @@
         font-size: 30px;
         animation: fall linear infinite;
         z-index: 1;
-        color: #ff4d6d;
+        color: #ff002f;
         pointer-events: none;
         filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
       }
 
       @keyframes fall {
@@ -645,7 +644,7 @@
 
       function createRedHearts() {
         const heartsContainer = document.getElementById("hearts");
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 20; i++) {
           const heart = document.createElement("div");
           heart.className = "hearts";
           heart.innerHTML = "❤"; // Red heart emoji
