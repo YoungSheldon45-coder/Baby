@@ -655,6 +655,9 @@
           heart.style.fontSize = Math.random() * 20 + 20 + "px"; // Random size between 20-40px
           heartsContainer.appendChild(heart);
         }
+        requestAnimationFrame(() => {
+            heartsContainer.appendChild(fragment);
+        });
       }
 
       function celebrate() {
@@ -677,7 +680,11 @@
           setTimeout(() => confetti.remove(), 1500);
         }
 
-        createRedHearts();
+        
+
+        requestAnimationFrame(() => {
+            createRedHearts();
+        });
 
         // Create new message element
         const successMessage = document.createElement("div");
